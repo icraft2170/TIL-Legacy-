@@ -1,6 +1,6 @@
 ---
 
-title: char[]의 다른점
+title: char[]의 
 date:2021-05-25
 author: 손현호
 
