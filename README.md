@@ -21,4 +21,4 @@ DailyLog
   - [21-06-01 DailyStudy](https://github.com/icraft2170/TIL/blob/master/dailylog/2021-06-01-dailylog.md) 
   - [21-06-02 DailyStudy](https://github.com/icraft2170/TIL/blob/master/dailylog/2021-06-02-dailylog.md)
   - [21-06-03 DailyStudy](https://github.com/icraft2170/TIL/blob/master/dailylog/2021-06-03-dailylog.md)
-  - - [21-06-15 DailyStudy](https://github.com/icraft2170/TIL/blob/master/Database/SQL200/SQL1_40.md)
+  - [21-06-15 DailyStudy](https://github.com/icraft2170/TIL/blob/master/Database/SQL200/SQL1_40.md)
