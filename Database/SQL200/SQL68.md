@@ -1,3 +1,4 @@
+```sql
 alter session set nls_date_format='RR/MM/DD';
 
 drop table emp;
@@ -512,3 +513,4 @@ WHERE deptno IN (20,30);
 
 
 							
+```
