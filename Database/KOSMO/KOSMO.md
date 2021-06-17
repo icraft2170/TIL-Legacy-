@@ -612,5 +612,159 @@ SELECT EMP_NO AS 직원번호
 FROM EMP;
 
 
+SELECT EMP_NO AS 직원번호
+		,EMP_NAME AS 직원이름
+		,JUMIN_NUM AS 주민번호
+		,CASE
+		WHEN SYSDATE-TO_DATE(SUBSTR(JUMIN_NUM,3,4),'MMDD') >=0 
+		THEN TO_DATE(SUBSTR(JUMIN_NUM,3,4),'MMDD')+(INTERVAL '1' YEAR)
+		ELSE TO_DATE(SUBSTR(JUMIN_NUM,3,4),'MMDD')
+		END
+		AS "다가올 생일"
+		,CASE
+		WHEN SYSDATE-TO_DATE(SUBSTR(JUMIN_NUM,3,4),'MMDD') >=0 
+		THEN (TO_DATE(SUBSTR(JUMIN_NUM,3,4),'MMDD')+(INTERVAL '1' YEAR)) - SYSDATE
+		ELSE TO_DATE(SUBSTR(JUMIN_NUM,3,4),'MMDD') - SYSDATE
+		END
+		AS "남은 일수"
+FROM EMP;
+
+
+--min,mas,avg,sum,count 함수들은 그룹합수 또는 통계함수 라고 부르기도 함.
+--그룹을 지어 연산하는 함수이기 때문
+--주로 GROUP by와 함께 사용
+--NULL 값 제외하고 계산
+
+
+SELECT EMP_NO 
+		,EMP_NAME
+		,to_char(hire_date,'YYYY-MM-DD(DAY) AM HH:MI:SS', 'NLS_DATE_LANGUAGE = Korean')
+FROM EMP;
+
+SELECT EMP_NO 
+		,EMP_NAME
+		,to_char(SYSDATE ,'YYYY-MM-DD(DY) HH24:MI:SS', 'NLS_DATE_LANGUAGE = Korean')
+FROM EMP;
+
+SELECT EMP_NO 
+		,EMP_NAME
+		,to_char(hire_date ,'YYYY-MM-DD(DY) Q PM HH:MI:SS', 'NLS_DATE_LANGUAGE = Korean')
+FROM EMP;
+-- 분기
+
+select
+       emp_no 
+      , emp_name 
+      , to_char( hire_date ,'YYYY"년"-MM"월"-DD"일" (DY) Q"분기" AM HH"시":MI"분":SS"초"' , 'NLS_DATE_LANGUAGE = Korean')    -- 시분초 HH:MI:SS
+   from 
+       emp; 
+       
+SELECT 
+	EMP_NO 
+	,EMP_NAME
+	, TO_NUMBER(TO_CHAR(sysdate,'RRRR'))-
+	TO_NUMBER(CASE SUBSTR(JUMIN_NUM,7,1) WHEN '1' THEN '19' WHEN '2' THEN '19' else '20' END||SUBSTR(JUMIN_NUM,1,2)) 
+FROM EMP e;
+
+select
+      emp_no      as "직원번호"
+      , emp_name   as "직원명"
+      , jumin_num   as "주민번호"
+      , case when 
+            to_date(
+               to_char(sysdate, 'YYYY')||substr(jumin_num, 3, 4)
+               , 'YYYYMMDD'
+            )
+            -
+            sysdate
+            >=0
+         then to_char(
+            to_date(
+               to_char(sysdate, 'YYYY')||substr(jumin_num, 3, 4)
+               , 'YYYY-MM-DD'
+            )
+          )
+         else to_char(
+            to_date(
+               to_number(to_char(sysdate,'YYYY'))+1||substr(jumin_num, 3, 4)
+                , 'YYYYMMDD'
+            )
+            , 'YYYY-MM-DD'
+            )
+      end      as "다가올 생일날"
+   from
+      emp;
+     
+     
+     
+      SELECT TO_DATE(SUBSTR(jumin_num,3, 4),'mm-dd') 
+      FROM emp;
+      
+     SELECT emp_no   AS 직원번호
+       ,emp_name AS 직원명
+       ,jumin_num ,
+       TO_DATE(
+       CASE
+              WHEN TO_DATE(SUBSTR(jumin_num,3, 4),'mmdd') - SYSDATE >= 0
+              THEN TO_CHAR(SYSDATE,'yyyy')
+                            ||SUBSTR(jumin_num,3, 4)
+              ELSE TO_CHAR(SYSDATE,'yyyy')+1
+                            ||SUBSTR(jumin_num,3, 4)
+       END,'YYYY-MM-DD') 
+       AS 다가올생일날 
+       ,FLOOR( TO_DATE(
+       CASE
+              WHEN TO_DATE(SUBSTR(jumin_num,3, 4),'mmdd') - SYSDATE >= 0
+              THEN TO_CHAR(SYSDATE,'yyyy')
+                            ||SUBSTR(jumin_num,3, 4)
+              ELSE TO_CHAR(SYSDATE,'yyyy')+1
+                            ||SUBSTR(jumin_num,3, 4)
+       END,'yyyy-mm-dd' )-SYSDATE ) 
+       AS 생일까지남은일수
+FROM   EMP;
+
+
+SELECT EMP_NAME
+FROM (SELECT SUBSTR(JUMIN_NUM,1,1) AS "Y",SUBSTR(JUMIN_NUM,7,1) AS "S", EMP_NAME FROM emp)
+WHERE y = 7 AND s = 1; 
+	 
+SELECT EMP_NAME
+FROM emp
+WHERE SUBSTR(JUMIN_NUM,1,1) LIKE '7%' AND SUBSTR(JUMIN_NUM,7,1) LIKE '1%' 
+
+select * 
+from emp 
+WHERE jumin_num like '7_____1%'
+
+select * from employee
+      where
+      to_char(   
+         to_date(   
+            case 
+               when substr(jumin_num, 7, 1)='1' then '19' 
+               when substr(jumin_num, 7, 1)='2' then '19' 
+            else '20'
+         end||substr(jumin_num,1,6) 
+         , 'YYYY-MM-DD'
+         )
+      , 'DY'
+      )
+      = 'WED'   
+      
+      select * from emp
+      where
+      to_char( 
+         to_date(
+             case 
+               when substr(jumin_num, 7, 1)='1' then '19' 
+               when substr(jumin_num, 7, 1)='3' then '20' 
+            else '00'
+         end||substr(jumin_num,1,1)||'0'
+         , 'YYYY' 
+         )
+      , 'YYYY'
+      )
+      ='1970'
+
 
 ```
