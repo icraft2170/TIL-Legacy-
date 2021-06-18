@@ -730,11 +730,11 @@ WHERE y = 7 AND s = 1;
 	 
 SELECT EMP_NAME
 FROM emp
-WHERE SUBSTR(JUMIN_NUM,1,1) LIKE '7%' AND SUBSTR(JUMIN_NUM,7,1) LIKE '1%' 
+WHERE SUBSTR(JUMIN_NUM,1,1) LIKE '7%' AND SUBSTR(JUMIN_NUM,7,1) LIKE '1%';
 
 select * 
 from emp 
-WHERE jumin_num like '7_____1%'
+WHERE jumin_num like '7_____1%';
 
 select * from employee
       where
@@ -749,7 +749,7 @@ select * from employee
          )
       , 'DY'
       )
-      = 'WED'   
+      = 'WED';
       
       select * from emp
       where
@@ -764,7 +764,7 @@ select * from employee
          )
       , 'YYYY'
       )
-      ='1970'
+      ='1970';
 
 SELECT *
 FROM EMP
