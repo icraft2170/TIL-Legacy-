@@ -254,3 +254,61 @@ display 속성이 block으로 변경됨
 - Flex Item의 공간 배분 전 기본 너비
 - auto(기본값:요소의 Content 너비)
 - 단위 :px,em,rem등
+
+
+## 전환
+
+### `transition`
+- 요소의 전환(시작과 끝) 효과를 지정하는 단축 속성
+```
+transition: 속성명 지속시간(필수포함) 타이밍함수 대기시간;
+속성명 : transition-property
+지속시간 : transition-duration
+타이밍함수 : transition-timing-function 
+대기시간 : transition-delay
+```
+
+### transition-property
+- 전환 효과를 사용할 속성 이름을 지정
+- `all(기본값 : 모든 속성에 지정)`
+- 속성이름을 값으로 준다
+
+### transition-duration
+- 전환 효과의 지속시간을 지정
+- 0s(기본값), 시간
+
+### transition-timing-function
+- 전환효과에 타이밍 함수 지정
+- ease(기본값 : 느리게-빠르게-느리게)
+- linear,ease-in,ease-out,ease-in-out
+
+### transition-delay
+- 전환 효과가 몇 초 뒤에 시작할지 대기시간을 지정
+- 0s(기본값), 시간을 초 단위로 지정한다.
+
+## 변환
+
+### transform
+- transform : 변환함수1 변환함수2, 변환함수3 ...;
+- transform : 원근법 이동 크기 회전 기울임;
+
+### 변환함수(2D)
+- translate(x,y),translateX(x), translateY(y) : 이동 X,Y축 
+- scale(x,y) : 크기(x,y축)
+- rotate(degree): 회전(각도)
+- skew(x,y), skewX(x), skewY(y) : 기울임(X,Y축)
+
+### 변환함수(3D)
+- rotateX(x),rotateY(y): 회전(x축), 회전(y축)
+- perspective(n) : 원근법(거리)
+
+
+### perspective
+- 하위 요소를 관찰하는 원근 거리 지정
+- 단위 : px
+
+
+### backface-visibility
+- 3D 변환으로 회전된 요소의 뒷면 숨김 여부
+- visible(기본값:뒷면 보임)
+- hidden( 뒷면 숨김 )
