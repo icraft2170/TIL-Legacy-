@@ -68,7 +68,7 @@ public class Window7 extends Window {
 ```java
 
 public abstract class WindowDecorator{
-    public String getOperatingSystem();
+    public abstract String getOperatingSystem();
 }
 
 
