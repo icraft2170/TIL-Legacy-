@@ -155,7 +155,7 @@ nums.splice(2,0,"hoho")
 
 
 ### JavaScript OOP?
-- 동적인 객체 정의를 지원한다 autoBoxing
+- 동적인 객체 정의를 지원한다
 
 #### JavaScript OOP
 - prototype
@@ -188,6 +188,7 @@ exam["math"] = 80;
 alert(exam["kor"]);
 ```
 - 기본적으로 아래와 같은 방법으로 객체 생성과정을 이행하는것을 권고
+
 
 
 
