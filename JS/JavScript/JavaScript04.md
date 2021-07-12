@@ -728,5 +728,119 @@ window.addEventListener("load", function(){
 
 ```js
 
+//Ex10-다중 노드선택 방법과 일괄삭제, 노드의 자리바꾸기
+window.addEventListener("load", function(){
 
+    var section = document.querySelector("#section10");
+    
+    var noticeList =section.querySelector(".notice-list"); 
+    var tbody = noticeList.querySelector("tbody");
+    var allCheckbox = section.querySelector(".overall-checkbox");
+    var delButton = section.querySelector(".del-button");
+    var swapButton = section.querySelector(".swap-button");
+
+    allCheckbox.onchange = function(){
+        var inputs = tbody.querySelectorAll('input[type ="checkbox"]');
+        for(var i = 0;i<inputs.length;i++){
+            inputs[i].checked = allCheckbox.checked;
+        }
+    };
+
+    delButton.onclick = function(){
+        var inputs = tbody.querySelectorAll('input[type ="checkbox"]:checked');
+        for(var i = 0;i<inputs.length;i++){
+            inputs[i].parentElement.parentElement.remove();
+        }
+    };
+
+    swapButton.onclick = function(){
+        var inputs = tbody.querySelectorAll('input[type ="checkbox"]:checked');
+        if(inputs.length != 2){
+            alert("2개를 선택 하셔야 합니다.");
+            return;
+        }
+        var trs = [];
+        for(var i=0 ;i<inputs.length ;i++){
+            trs.push(inputs[i].parentElement.parentElement);
+        }
+        var clonseNode = trs[0].cloneNode(true);
+
+        trs[1].replaceWith(clonseNode);
+        trs[0].replaceWith(trs[1]);
+
+        
+    };
+
+});
 ```
+- replaceWith()를 통해서 변경하기 
+    - 해당 노드를 지우고 위치로 이동
+
+## 제목으로 내용 정렬
+
+```js
+
+//Ex11-클릭한 컬럼을 기준으로 레코드 정렬하기 #1
+window.addEventListener("load", function(){
+
+    var notices = [
+        {"id":3, "title":"기본기가 튼튼해야....", "regDate":"2019-02-01", "writerId":"newlec", "hit":1},
+        {"id":4, "title":"근데 조회수가 ㅜㅜ..", "regDate":"2019-01-25", "writerId":"newlec", "hit":0},
+        {"id":1, "title":"유투브에 끌려다니지 않으려고 했는데....ㅜㅜ..", "regDate":"2019-02-05", "writerId":"newlec", "hit":2},
+        {"id":2, "title":"자바스크립트란..", "regDate":"2019-02-02", "writerId":"newlec", "hit":0}
+    ];
+
+    var section = document.querySelector("#section11");
+    
+    var noticeList =section.querySelector(".notice-list");
+    var titldTd = section.querySelector(".title");
+    var tbodyNode = noticeList.querySelector("tbody");
+
+    var bindData = function(){
+        var template = section.querySelector("template");
+
+        for(var i=0; i<notices.length; i++){
+            var cloneNode = document.importNode(template.content, true);
+            var tds = cloneNode.querySelectorAll("td");
+            tds[0].textContent = notices[i].id;            
+
+            var aNode = tds[1].children[0];
+            aNode.href=notices[i].id;
+            aNode.textContent = notices[i].title;
+
+            tds[2].textContent = notices[i].regDate;
+            tds[3].textContent = notices[i].writerId;
+            tds[4].textContent = notices[i].hit;
+
+            tbodyNode.appendChild(cloneNode);
+
+
+        }
+    };
+    bindData();
+
+    var titleSorted = false;
+    
+    titldTd.onclick = function(){
+        
+        tbodyNode.innerHTML = "";
+        if(!titleSorted){
+        titleSorted = true;
+       notices.sort(function(a,b){
+            if(a.title < b.title){
+                return -1;
+            }else if(a.title > b.title){
+               return 1;
+            }else{
+               return 0;
+            }
+       });
+    }else{
+       notices.reverse();
+    }
+    bindData();
+    };
+});
+```
+
+
