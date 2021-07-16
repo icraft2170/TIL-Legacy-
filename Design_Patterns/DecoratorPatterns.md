@@ -25,7 +25,7 @@ title: 데코레이터 패턴
 
 ```java
 public abstract class Window {
-    String opName="Windw"
+    String opName="Window"
 
     public String getOperatingSystem(){
         return opName;
@@ -67,7 +67,7 @@ public class Window7 extends Window {
 
 ```java
 
-public abstract class WindowDecorator{
+public abstract class WindowDecorator extends Window{
     public abstract String getOperatingSystem();
 }
 
