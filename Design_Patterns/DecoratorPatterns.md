@@ -136,8 +136,8 @@ public class WindowsTest{
         System.out.println(window2.getOperatingSystem() + " $" + window2.cost());
         // Window10 HOME $ 163.4
         Window window3 = new Window10()
-        window3 = new Pro(window2);
-        window3 = new Professional(window2);
+        window3 = new Pro(window3);
+        window3 = new Professional(window3);
         System.out.println(window3.getOperatingSystem() + " $" + window3.cost());
         // Window10 PRO Professional $ 253.4
     }
